@@ -1,64 +1,50 @@
 import java.io.BufferedReader;
 import java.io.File;
-
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
+import Data_Setup.Record;
+import Main_App.Main;
 
 
 public class Example {
 
 	public static int KEY = 23332;
-	public static String Enc_Path = "C:\\Users\\sagik\\git\\Encryption_and_decryption\\Encryption files\\";
-	public static String Dec_Path = "C:\\Users\\sagik\\git\\Encryption_and_decryption\\Decryption files\\";
+	
+	public static String Bonus_Path = "C:\\Users\\sagik\\git\\Encryption_and_decryption\\Bonus\\";
+	public static String Bonus_File_Write = Bonus_Path+"Bonus_Key_List.csv";
 
-	public static void main(String[] args) throws IOException {
 
-		//Write_2_Decryption_File(Encryption(Read_From_File(Enc_Path+"First.txt"),KEY));
-		//Write_2_Encryption_File(Decryption(Read_From_Decryption_File(Enc_Path+"Encoded.txt"),KEY));
+	public static void main(String[] args) throws IOException, ParseException {
+
+
 		//System.out.println(Decryption2(Read_From_File(Enc_Path+"Encoded.txt"),KEY));
-		Decoding_Keys(Enc_Path);
+		getFiles();
 
 	}
+	
+	public static void getFiles() throws IOException, ParseException {
 
-	public static String Encryption(String msg, int key){
-		String ans = "";
-		Random rand = new Random(key);
-
-		for (int i = 0; i < msg.length(); i++) {
-			char c = msg.charAt(i);
-			int s = c;
-			int rd = rand.nextInt()%(256*256);
-			int s2 = s^rd;
-			char c2 = (char)(s2);
-			ans += c2;
+		File folder = new File(Bonus_Path);
+		String[] files_Names = folder.list();
+		
+		int counter = 0;
+		for(int i = 0; i < files_Names.length; i++) {
+			if(files_Names[i].startsWith("enc") && files_Names[i].endsWith(".txt")) {
+				Decoding_Keys(Bonus_Path,files_Names[i]);
+				counter++;
+			}	
 		}
-
-		return ans;
-
+		System.out.println(counter +" Files founded");
 	}
 
-	public static String Decryption(ArrayList<Integer> arr, int key){
-
-		String ans = "";
-		Random rand = new Random(key);
-
-		for (int i = 0; i < arr.size(); i++) {
-
-			int s = arr.get(i);
-			int rd = rand.nextInt()%(256*256);
-			int s2 = s^rd;
-			char c2 = (char)(s2);
-			ans += c2;	
-		}
-
-		return ans;	
-	}
-
-	public static String Decryption2(String Data, int key){
+	public static String Encryption_And_Decryption(String Data, int key){
 		String ans = "";
 		Random rand = new Random(key);
 
@@ -75,114 +61,60 @@ public class Example {
 		return ans;	
 	}
 
-	public static String Decryption3(char Data, int key){
-		String ans = "";
-		Random rand = new Random(key);
-
-		int s = Data;
-		int rd = rand.nextInt()%(256*256);
-		int s2 = s^rd;
-		char c2 = (char)(s2);
-		ans += c2;	
-		return ans;
+	public static void Write_Headers() throws IOException {
+		String[] titles_list = {"File name","Key"};
+		FileWriter file = new FileWriter(Bonus_File_Write);
+		
+		for (int i = 0; i <= titles_list.length-1; i++) {
+			file.write(titles_list[i]+",");
+		}
+		file.close();
+		
+		
 	}
-
-	public static void Write_2_Decryption_File(String msg_enc) throws IOException {
-
-		FileWriter fw = new FileWriter(Enc_Path+"Encoded.txt");
+	public static void Write_2_CSV(ArrayList<String> Bonus_Key_List) throws IOException {
+		
+		FileWriter fw = new FileWriter(Bonus_File_Write, true);
 		StringBuilder stringBuilder = new StringBuilder();
-
-		for (int i = 0; i < msg_enc.length(); i++) {
-			stringBuilder.append((int)msg_enc.charAt(i)+" ");
-		}
-		fw.write(stringBuilder.toString());
-		fw.close();
-	}
-
-	public static void Write_2_Decryption_File2(String msg_enc) throws IOException {
-
-		FileWriter fw = new FileWriter(Enc_Path+"Encoded.txt");
-		StringBuilder stringBuilder = new StringBuilder();
-
-		for (int i = 0; i < msg_enc.length(); i++) {
-			stringBuilder.append((int)msg_enc.charAt(i)+" ");
-		}
-		fw.write(stringBuilder.toString());
-		fw.close();
-	}
-
-	public static String Read_From_File(String Path) throws IOException {
-
-		String Orig = "";
-
-		FileReader fr = new FileReader(Path);
-		BufferedReader br = new BufferedReader(fr);	
-		String Line = br.readLine();
-
-		while(Line!=null)
-		{
-
-			Orig=Orig+Line;
-			Line = br.readLine();
-
-		}
-
-		br.close();
-		//System.out.println(Orig);
-		return Orig;
-	}
-
-	/*public static ArrayList<Integer> Read_From_Decryption_File(String Path) throws IOException {
-
-		File f = new File(Path);
-		Scanner scan = new Scanner(f);
-		ArrayList<Integer> Words = new ArrayList<Integer>();
-
-		while(scan.hasNextInt()) {
-
-			Words.add(scan.nextInt());
-		}
-
-		scan.close();
-		System.out.println("Words ArrayList: "+Words);
-		return Words;
-	}*/
-
-	public static void Write_2_Encryption_File(String msg_enc) throws IOException {
-
-		FileWriter fw = new FileWriter(Enc_Path+"Encoded2.txt");
-		StringBuilder stringBuilder = new StringBuilder();
-
-		for (int i = 0; i < msg_enc.length(); i++) {
-			stringBuilder.append(msg_enc.charAt(i)+"\n");
-		}
-
-		fw.write(stringBuilder.toString());
-		fw.close();
-	}
-
-	public static void Decoding_Keys(String Path) throws IOException {
-		String File_Name="enc_0_msg.txt";
-		String DATA = Read_From_File(Path+File_Name);
-		String DecData; 
-
-		for (int i = 75860000; i < 99999999; i++) {
-			DecData = Decryption2(DATA, i);
-			//System.out.println(DecData);
-			System.out.println("KEYS = "+i);
-			if((DecData.charAt(0) > 1487 && DecData.charAt(0) < 1515) &&
-					(DecData.charAt(1) > 1487 && DecData.charAt(1) < 1515) &&
-					(DecData.charAt(2) > 1487 && DecData.charAt(2) < 1515))/*
-					|| (DecData.charAt(0) > 96 && DecData.charAt(0) < 123)
-					|| (DecData.charAt(0) > 54 && DecData.charAt(0) < 91)) */
-			{
-				System.out.println("Key: "+i);
-				break;
+		stringBuilder.append("\n");
+		int counter = 0;
+		for (int i = 0; i < Bonus_Key_List.size(); i++) {	
+			stringBuilder.append((Bonus_Key_List.get(i).toString().replace("[", "").replace("]", "")));
+			stringBuilder.append(",");
+			if(counter%2 != 0) {
+				stringBuilder.append("\n");
 			}
 		}
 
+		fw.write(stringBuilder.toString());
+		fw.close();
+	}
+	
+	public static void Decoding_Keys(String Folder, String File) throws IOException {
+		Write_Headers();
+		ArrayList<String> Keys_List = new ArrayList<String>();
+		
+		String encoded_data = Encryption_Algorithm.Read_From_File(Folder+File);
+		String decoded_data;
+
+		//Thread t1=new Thread(DATA);
+		//Thread t2=new Thread(DATA);
+		
+		//t1.start();
+		//t2.start();
+		
+		for (int i = 75863830; i < 99999999; i++) {
+			decoded_data = Encryption_And_Decryption(encoded_data, i);
+			if((decoded_data.charAt(0) > 1487 && decoded_data.charAt(0) < 1515) &&
+					(decoded_data.charAt(1) > 1487 && decoded_data.charAt(1) < 1515) &&
+					(decoded_data.charAt(2) > 1487 && decoded_data.charAt(2) < 1515))
+			{
+				System.out.println("File Name: "+File+"\nKey: "+i);
+				Keys_List.add(File);
+				Keys_List.add(""+i);
+				break;
+			}
+		}
+		Write_2_CSV(Keys_List);
 	}
 }
-
-
-
