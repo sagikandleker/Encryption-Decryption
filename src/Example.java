@@ -17,9 +17,10 @@ public class Example {
 
 	public static void main(String[] args) throws IOException {
 
-		Write_2_Decryption_File(Encryption(Read_From_Encryption_File(Enc_Path+"First.txt"),KEY));
+		//Write_2_Decryption_File(Encryption(Read_From_File(Enc_Path+"First.txt"),KEY));
 		//Write_2_Encryption_File(Decryption(Read_From_Decryption_File(Enc_Path+"Encoded.txt"),KEY));
-		System.out.println(Decryption2(Read_From_Encryption_File(Enc_Path+"Encoded.txt"),KEY));
+		//System.out.println(Decryption2(Read_From_File(Enc_Path+"Encoded.txt"),KEY));
+		Decoding_Keys(Enc_Path);
 
 	}
 
@@ -41,6 +42,7 @@ public class Example {
 	}
 
 	public static String Decryption(ArrayList<Integer> arr, int key){
+
 		String ans = "";
 		Random rand = new Random(key);
 
@@ -56,37 +58,12 @@ public class Example {
 		return ans;	
 	}
 
-	public static void Write_2_Decryption_File(String msg_enc) throws IOException {
-
-		FileWriter fw = new FileWriter(Enc_Path+"Encoded.txt");
-		StringBuilder stringBuilder = new StringBuilder();
-
-		for (int i = 0; i < msg_enc.length(); i++) {
-			stringBuilder.append((int)msg_enc.charAt(i)+" ");
-		}
-		fw.write(stringBuilder.toString());
-		fw.close();
-	}
-	
-	public static void Write_2_Decryption_File2(String msg_enc) throws IOException {
-
-		FileWriter fw = new FileWriter(Enc_Path+"Encoded.txt");
-		StringBuilder stringBuilder = new StringBuilder();
-
-		for (int i = 0; i < msg_enc.length(); i++) {
-			stringBuilder.append((int)msg_enc.charAt(i)+" ");
-		}
-		fw.write(stringBuilder.toString());
-		fw.close();
-	}
-	
 	public static String Decryption2(String Data, int key){
 		String ans = "";
 		Random rand = new Random(key);
 
 		String[] array = Data.split(" ");
-		
-		
+
 		for (int i = 0; i < array.length-1; i++) {
 			int s = Integer.parseInt(array[i]);
 			int rd = rand.nextInt()%(256*256);
@@ -98,8 +75,43 @@ public class Example {
 		return ans;	
 	}
 
+	public static String Decryption3(char Data, int key){
+		String ans = "";
+		Random rand = new Random(key);
 
-	public static String Read_From_Encryption_File(String Path) throws IOException {
+		int s = Data;
+		int rd = rand.nextInt()%(256*256);
+		int s2 = s^rd;
+		char c2 = (char)(s2);
+		ans += c2;	
+		return ans;
+	}
+
+	public static void Write_2_Decryption_File(String msg_enc) throws IOException {
+
+		FileWriter fw = new FileWriter(Enc_Path+"Encoded.txt");
+		StringBuilder stringBuilder = new StringBuilder();
+
+		for (int i = 0; i < msg_enc.length(); i++) {
+			stringBuilder.append((int)msg_enc.charAt(i)+" ");
+		}
+		fw.write(stringBuilder.toString());
+		fw.close();
+	}
+
+	public static void Write_2_Decryption_File2(String msg_enc) throws IOException {
+
+		FileWriter fw = new FileWriter(Enc_Path+"Encoded.txt");
+		StringBuilder stringBuilder = new StringBuilder();
+
+		for (int i = 0; i < msg_enc.length(); i++) {
+			stringBuilder.append((int)msg_enc.charAt(i)+" ");
+		}
+		fw.write(stringBuilder.toString());
+		fw.close();
+	}
+
+	public static String Read_From_File(String Path) throws IOException {
 
 		String Orig = "";
 
@@ -110,17 +122,17 @@ public class Example {
 		while(Line!=null)
 		{
 
-			Orig=Orig+Line+"\n";
+			Orig=Orig+Line;
 			Line = br.readLine();
 
 		}
 
 		br.close();
-		System.out.println(Orig);
+		//System.out.println(Orig);
 		return Orig;
 	}
 
-	public static ArrayList<Integer> Read_From_Decryption_File(String Path) throws IOException {
+	/*public static ArrayList<Integer> Read_From_Decryption_File(String Path) throws IOException {
 
 		File f = new File(Path);
 		Scanner scan = new Scanner(f);
@@ -134,7 +146,7 @@ public class Example {
 		scan.close();
 		System.out.println("Words ArrayList: "+Words);
 		return Words;
-	}
+	}*/
 
 	public static void Write_2_Encryption_File(String msg_enc) throws IOException {
 
@@ -144,9 +156,31 @@ public class Example {
 		for (int i = 0; i < msg_enc.length(); i++) {
 			stringBuilder.append(msg_enc.charAt(i)+"\n");
 		}
-		
+
 		fw.write(stringBuilder.toString());
 		fw.close();
+	}
+
+	public static void Decoding_Keys(String Path) throws IOException {
+		String File_Name="enc_0_msg.txt";
+		String DATA = Read_From_File(Path+File_Name);
+		String DecData; 
+
+		for (int i = 75860000; i < 99999999; i++) {
+			DecData = Decryption2(DATA, i);
+			//System.out.println(DecData);
+			System.out.println("KEYS = "+i);
+			if((DecData.charAt(0) > 1487 && DecData.charAt(0) < 1515) &&
+					(DecData.charAt(1) > 1487 && DecData.charAt(1) < 1515) &&
+					(DecData.charAt(2) > 1487 && DecData.charAt(2) < 1515))/*
+					|| (DecData.charAt(0) > 96 && DecData.charAt(0) < 123)
+					|| (DecData.charAt(0) > 54 && DecData.charAt(0) < 91)) */
+			{
+				System.out.println("Key: "+i);
+				break;
+			}
+		}
+
 	}
 }
 
