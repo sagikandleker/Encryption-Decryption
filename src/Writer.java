@@ -2,6 +2,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Write functions.
+ * @author Sagi, Roni, Shlomi.
+ *
+ */
 public class Writer {
 	/**
 	 * Write Decoded message to file.
@@ -41,7 +46,10 @@ public class Writer {
 	}
 
 
-	
+	/**
+	 * Write Hreaders to the CSV file.
+	 * @throws IOException
+	 */
 	public static void Write_Headers() throws IOException {
 		String[] titles_list = {"File name","Key"};
 		FileWriter file = new FileWriter(Hack_Keys.Bonus_File_Write);
@@ -52,7 +60,11 @@ public class Writer {
 		file.close();
 	}
 
-	
+	/**
+	 * Write 2 the CSV file all the Keys with file names.
+	 * @param Bonus_Key_List ArrayList with files names and keys.
+	 * @throws IOException
+	 */
 	public static void Write_2_CSV(ArrayList<String> Bonus_Key_List) throws IOException {
 		Write_Headers();
 		
