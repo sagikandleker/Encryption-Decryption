@@ -5,6 +5,11 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 
+/**
+ * Bonus part.
+ * @author Sagi, Roni, Shlomi.
+ *
+ */
 public class Hack_Keys {
 
 	public static String Bonus_Path = Main.PATH+"Bonus/";
@@ -21,13 +26,12 @@ public class Hack_Keys {
 		File folder = new File(Bonus_Path);
 		String[] files_Names = folder.list();
 		ArrayList<String> Keys_List = new ArrayList<String>();
-
+		System.out.println("Length of folder is: "+ files_Names.length);
 		int counter = 0;
-		System.out.println("File size = " + files_Names.length);
 		for(int i = 0; i < files_Names.length; i++) {
 			if(files_Names[i].startsWith("enc") && files_Names[i].endsWith(".txt")) {
-				System.out.println("File " + i);
-				Main.Decoding_Keys(Bonus_Path,files_Names[i], Keys_List);
+				System.out.println("Searching key to file number: " + i);
+				Main.Decoding_Keys(files_Names[i], Keys_List);
 				counter++;
 			}	
 		}
