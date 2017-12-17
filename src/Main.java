@@ -9,7 +9,7 @@ public class Main {
 	public static String Enc_Path = Path+"Encryption files\\";
 	public static String Dec_Path = Path+"Decryption files\\";
 
-	public static void main(String[] args) throws IOException, ParseException {
+	public static void main(String[] args) throws IOException, ParseException, InterruptedException {
 
 		Scanner sc = new Scanner(System.in);
 		String input;

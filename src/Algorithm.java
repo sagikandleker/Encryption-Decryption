@@ -45,7 +45,7 @@ public class Algorithm {
 			char c2 = (char)(s2);
 			ans += c2;	
 		}
-		return ans;	
+		return ans;
 	}
 
 }

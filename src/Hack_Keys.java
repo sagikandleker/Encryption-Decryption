@@ -12,8 +12,9 @@ public class Hack_Keys {
 	 * 
 	 * @throws IOException
 	 * @throws ParseException
+	 * @throws InterruptedException 
 	 */
-	public static void getFiles() throws IOException, ParseException {
+	public static void getFiles() throws IOException, ParseException, InterruptedException {
 
 		File folder = new File(Bonus_Path);
 		String[] files_Names = folder.list();
@@ -35,29 +36,54 @@ public class Hack_Keys {
 	 * @param Folder@
 	 * @param File
 	 * @throws IOException
+	 * @throws InterruptedException 
 	 */
-	public static void Decoding_Keys(String Folder, String File, ArrayList<String> Keys_List) throws IOException {
+	public static void Decoding_Keys(String Folder, String File, ArrayList<String> Keys_List) throws IOException, InterruptedException {
+		String path = Folder+File;
+		File file = new File(path);
+		
+		Keys_List.add(file.getAbsolutePath());
+		
+		int maxKey = 1_000_000_000;
+		Thr task1 = new Thr(0, maxKey/4, path);
+		Thr task2 = new Thr((maxKey/4)+1, maxKey/2, path);
+		Thr task3 = new Thr((maxKey/2)+1, 3*(maxKey/4), path);
+		Thr task4 = new Thr(3*(maxKey/4)+1, maxKey, path);
+		
+		if(task1.keyFounded != -1)
+			Keys_List.add(""+task1.keyFounded);
+		else if(task2.keyFounded != -1)
+			Keys_List.add(""+task1.keyFounded);
+		
+		Thread t1=new Thread(task1);
+		Thread t2=new Thread(task2);
+		Thread t3=new Thread(task3);
+		Thread t4=new Thread(task4);
+		
+		t1.setPriority(Thread.MAX_PRIORITY);
+		t2.setPriority(Thread.MAX_PRIORITY);
+		t3.setPriority(Thread.MAX_PRIORITY);
+		t4.setPriority(Thread.MAX_PRIORITY);
+		
+		t1.setName("Task 1");
+		t2.setName("Task 2");
+		t3.setName("Task 3");
+		t4.setName("Task 4");
+		
+		t1.start();
+		t2.start();
+		t3.start();
+		t4.start();
+		
+		t1.join();
+		t2.join();
+		t3.join();
+		t4.join();
+	
+	
+			//System.out.println("File Name: "+File+"\nKey: "+i);
+			//Keys_List.add(File);
+			//Keys_List.add(""+key);
 
-		String encoded_data = Read_From_File.Integer_File(Folder+File);
-		String decoded_data;
-
-		//Thread t1=new Thread(DATA);
-		//Thread t2=new Thread(DATA);
-
-		//t1.start();
-		//t2.start();
-
-		for (int i = 75863833; i < 99999999; i++) {
-			decoded_data = Algorithm.Decryption(encoded_data, i);
-			if((decoded_data.charAt(0) > 1487 && decoded_data.charAt(0) < 1515) &&
-					(decoded_data.charAt(1) > 1487 && decoded_data.charAt(1) < 1515) &&
-					(decoded_data.charAt(2) > 1487 && decoded_data.charAt(2) < 1515)) {
-
-				System.out.println("File Name: "+File+"\nKey: "+i);
-				Keys_List.add(File);
-				Keys_List.add(""+i);
-				break;
-			}
-		}
 	}
 }
