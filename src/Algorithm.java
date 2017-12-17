@@ -2,13 +2,13 @@ import java.util.Random;
 
 public class Algorithm {
 
-	public static int KEY = 75863839;
+	public static int KEY = 28521971;
 
 	/**
 	 * Encryption with Encryption char Algorithm.
-	 * @param text
-	 * @param key
-	 * @return
+	 * @param msg Message to enc/denc.
+	 * @param key A key.
+	 * @return Encoded/Decoded message.
 	 */
 	public static String Encryption(String msg, int key){
 		String ans = "";
@@ -27,10 +27,10 @@ public class Algorithm {
 	}
 
 	/**
-	 * Decryption with Decryption int Algorithm.
-	 * @param text
-	 * @param key
-	 * @return
+	 * 
+	 * @param msg Message to decode
+	 * @param key Key.
+	 * @return Decoded message.
 	 */
 	public static String Decryption(String msg, int key){
 		String ans = "";
