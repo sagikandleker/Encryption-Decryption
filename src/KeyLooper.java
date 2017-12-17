@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * This is the main looper of decoding encoded messages.
- *
+ * @author Sagi, Roni, Shlomi.
  */
 public class KeyLooper extends Thread{
 
@@ -54,6 +54,6 @@ public class KeyLooper extends Thread{
 			}
 		}
 		//Inform the user .
-		System.out.println(Thread.currentThread().getName() + " IS STOPPING");
+		//System.out.println(Thread.currentThread().getName() + " IS STOPPING");
 	}
 }
