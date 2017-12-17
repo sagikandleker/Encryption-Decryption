@@ -1,12 +1,8 @@
 import java.util.Random;
 
-// Encoded - מוצפן
-// Decoded - מפוענח
-// Encryption - הצפנה
-// Decryption - פענוח
 public class Algorithm {
 
-	public static int KEY = 22334455;
+	public static int KEY = 75863839;
 
 	/**
 	 * Encryption with Encryption char Algorithm.

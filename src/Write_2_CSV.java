@@ -23,7 +23,8 @@ public class Write_2_CSV {
 	 * @throws IOException
 	 */
 	public static void Write(ArrayList<String> Bonus_Key_List) throws IOException {
-
+		Write_Headers();
+		
 		FileWriter fw = new FileWriter(Hack_Keys.Bonus_File_Write, true);
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("\n");
