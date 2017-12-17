@@ -1,7 +1,12 @@
 import java.util.Random;
 
+/**
+ * Symmetric encryption & decryption function.
+ * @author Sagi, Roni, Shlomi.
+ *
+ */
 public class Algorithm {
-
+	//Choose key to Encoded & Decoded ->
 	public static int KEY = 28521971;
 
 	/**
