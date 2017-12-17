@@ -7,8 +7,19 @@ import java.util.Scanner;
 
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
+/**
+ * Read from files (String file or Integer file) functions.
+ * @author Sagi, Roni, Shlomi.
+ *
+ */
 public class Read_From_File {
 
+	/**
+	 * Read text from file by Strings.
+	 * @param Path file to read.
+	 * @return All the text in String.
+	 * @throws IOException
+	 */
 	public static String String_File(String Path) throws IOException {
 
 		String Orig = "";
@@ -29,6 +40,12 @@ public class Read_From_File {
 		return Orig;
 	}
 
+	/**
+	 * Read text from file by Integers.
+	 * @param Path file to read
+	 * @return String with numbers.
+	 * @throws IOException
+	 */
 	public static String Integer_File(String Path) throws IOException {
 
 		File f = new File(Path);
