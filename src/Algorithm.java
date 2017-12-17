@@ -1,9 +1,5 @@
 import java.util.Random;
 
-// Encoded - מוצפן
-// Decoded - מפוענח
-// Encryption - הצפנה
-// Decryption - פענוח
 public class Algorithm {
 
 	public static int KEY = 22334455;
