@@ -49,7 +49,7 @@ public class KeyLooper extends Thread{
 				//Check if is 'חית' .
 				if((decoded_data.charAt(0) == 1495 && decoded_data.charAt(1) == 1497 && decoded_data.charAt(2) == 1514)) {
 					flag = true;
-					System.out.println("Thread: " + Thread.currentThread().getName() +"\nFile Name: "+file.getAbsolutePath()+"\nKey: "+key);
+					System.out.println("Thread: " + Thread.currentThread().getName() +"\nFile Name: "+file.getName()+"\nKey: "+key);
 					keyFounded = key;
 					//Add to list of founded keys.
 					Key_List.add(file.getName());
@@ -62,6 +62,6 @@ public class KeyLooper extends Thread{
 		}
 		//Inform the user .
 		//System.out.println(Thread.currentThread().getName() + " IS STOPPING");
-		Thread.yield();
+		//Thread.yield();
 	}
 }
