@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 /**
  * Write functions.
- * @author Sagi, Roni, Shlomi.
  *
  */
 public class Writer {
@@ -47,7 +46,7 @@ public class Writer {
 
 
 	/**
-	 * Write Hreaders to the CSV file.
+	 * Write Headers to the CSV file.
 	 * @throws IOException
 	 */
 	public static void Write_Headers() throws IOException {
@@ -67,7 +66,7 @@ public class Writer {
 	 */
 	public static void Write_2_CSV(ArrayList<String> Bonus_Key_List) throws IOException {
 		Write_Headers();
-		
+
 		FileWriter fw = new FileWriter(Hack_Keys.Bonus_File_Write, true);
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("\n");
@@ -75,15 +74,15 @@ public class Writer {
 		for (int i = 0; i < Bonus_Key_List.size(); i++) {	
 			stringBuilder.append((Bonus_Key_List.get(i)));
 			stringBuilder.append(",");
-			
+
 			if(counter%2 != 0) {
 				stringBuilder.append("\n");
 			}
 			counter++;
 		}
-		
+
 		fw.write(stringBuilder.toString());
 		fw.close();
 	}
-	
+
 }

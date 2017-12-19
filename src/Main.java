@@ -6,17 +6,16 @@ import java.util.Scanner;
 
 /**
  * Main
- * @author Sagi, Roni, Shlomi.
  *
  */
 public class Main {
-	
-	//Change the PATH String to your work-space folder.
-	public static final String PATH = "C:/Users/RoniGu/git/Encryption_and_decryption/";
+
+	//Insert the PATH String to your work-space folder.
+	public static final String PATH = "C:\\Users\\sagik\\git\\Encryption_and_decryption\\";
 	public static final String IN_PATH = PATH+"Read From files/";
 	public static final String ENC_PATH = PATH+"Encryption files/";
 	public static final String DEC_PATH = PATH+"Decryption files/";
-	
+
 	/**
 	 * Main testing function.
 	 * @param args
@@ -41,7 +40,7 @@ public class Main {
 		}
 		sc.close();
 	}
-	
+
 	/**
 	 * Decode file.
 	 * @param Folder Folder to scan.
@@ -53,10 +52,10 @@ public class Main {
 	public static void Decoding_Keys(String filename,  ArrayList<String> Keys_List) throws IOException, InterruptedException {
 		//max key value.
 		int maxKey = 100_000_000;
-		
+
 		String path = Hack_Keys.Bonus_Path+filename;
 		File file = new File(path);
-		
+
 		//Init tasks.
 		int val = maxKey/8;
 		KeyLooper task1 = new KeyLooper(0, val, file, Keys_List);
@@ -76,6 +75,7 @@ public class Main {
 		Thread t6=new Thread(task6);
 		Thread t7=new Thread(task7);
 		Thread t8=new Thread(task8);
+
 
 		t1.setPriority(Thread.MAX_PRIORITY);
 		t2.setPriority(Thread.MAX_PRIORITY);

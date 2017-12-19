@@ -2,14 +2,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.plaf.synth.SynthSpinnerUI;
 
 /**
  * Read from files (String file or Integer file) functions.
- * @author Sagi, Roni, Shlomi.
  *
  */
 public class Read_From_File {
@@ -51,11 +48,11 @@ public class Read_From_File {
 		File f = new File(Path);
 		Scanner scan = new Scanner(f);
 		String msg = "";
-			
-			msg = msg+(scan.nextInt())+" "+(scan.nextInt())+" "+(scan.nextInt()+" "+(scan.nextInt()));
-		
+
+		msg = msg+(scan.nextInt())+" "+(scan.nextInt())+" "+(scan.nextInt()+" "+(scan.nextInt()));
+
 		scan.close();
 		return msg;
 	}
-	
+
 }
