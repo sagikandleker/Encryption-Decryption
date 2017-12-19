@@ -2,11 +2,10 @@ import java.util.Random;
 
 /**
  * Symmetric encryption & decryption function.
- * @author Sagi, Roni, Shlomi.
  *
  */
 public class Algorithm {
-	//Choose key to Encoded & Decoded ->
+	//Insert a key to Encoded & Decoded ->
 	public static int KEY = 28521971;
 
 	/**
@@ -33,7 +32,7 @@ public class Algorithm {
 
 	/**
 	 * 
-	 * @param msg Message to decode
+	 * @param msg Message to decode.
 	 * @param key Key.
 	 * @return Decoded message.
 	 */
