@@ -28,7 +28,7 @@ public class Read_From_File {
 		while(Line!=null)
 		{
 
-			Orig = Orig+Line+" ";
+			Orig = Orig+Line+"\n";
 			Line = br.readLine();
 
 		}
