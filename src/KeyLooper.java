@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 /**
  * This is the main looper of decoding encoded messages.
- * @author Sagi, Roni, Shlomi.
  */
 public class KeyLooper extends Thread{
-
+	// When the flag change to true all the Threads stop the searching to the specific file.
+	public static boolean flag = false;
 	final int keyFrom, keyTo;
 	final String encoded_data;
 	public int keyFounded = -1;
@@ -36,24 +36,32 @@ public class KeyLooper extends Thread{
 	 */
 	@Override
 	public void run() {
+		//
+		flag = false;
 		String decoded_data;
 		for (int key = keyFrom; key < keyTo; key++) {
-			//Get first 3 chars from encoded file.
-			decoded_data = Algorithm.Decryption(encoded_data, key);
-			//Check if is 'חית' .
-			if((decoded_data.charAt(0) == 1495 && decoded_data.charAt(1) == 1497 && decoded_data.charAt(2) == 1514)) {
-				System.out.println("Thread: " + Thread.currentThread().getName() +"\nFile Name: "+file.getAbsolutePath()+"\nKey: "+key);
-				keyFounded = key;
-				//Add to list of founded keys.
-				Key_List.add(file.getName());
-				Key_List.add(""+key);
-				
-				//exit loop.
+			if(flag == true) {
 				break;
+			}
+			else {
+				//Get first 3 chars from encoded file.
+				decoded_data = Algorithm.Decryption(encoded_data, key);
+				//Check if is 'חית' .
+				if((decoded_data.charAt(0) == 1495 && decoded_data.charAt(1) == 1497 && decoded_data.charAt(2) == 1514)) {
+					flag = true;
+					System.out.println("Thread: " + Thread.currentThread().getName() +"\nFile Name: "+file.getAbsolutePath()+"\nKey: "+key);
+					keyFounded = key;
+					//Add to list of founded keys.
+					Key_List.add(file.getName());
+					Key_List.add(""+key);
 
+					//exit loop.
+					break;
+				}
 			}
 		}
 		//Inform the user .
 		//System.out.println(Thread.currentThread().getName() + " IS STOPPING");
+		Thread.yield();
 	}
 }
