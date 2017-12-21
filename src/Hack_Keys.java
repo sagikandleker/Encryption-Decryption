@@ -32,9 +32,9 @@ public class Hack_Keys {
 				counter++;
 			}	
 		}
-		Writer.Write_2_CSV(Keys_List);
+		//Writer.Write_2_CSV(Keys_List);
 		//final long duration = System.nanoTime() - startTime;
-		//System.out.println(duration/1000000000);
+		System.out.println(duration/1000000000);
 		System.out.println(counter +" Files founded\nThe Keys to the files are in the file - "+Bonus_File_Write);
 	}
 
