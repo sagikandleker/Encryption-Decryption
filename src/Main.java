@@ -56,7 +56,7 @@ public class Main {
 		String path = Hack_Keys.Bonus_Path+filename;
 		File file = new File(path);
 
-		//Init tasks.
+		//Init tasks
 		int val = maxKey/8;
 		KeyLooper task1 = new KeyLooper(0, val, file, Keys_List);
 		KeyLooper task2 = new KeyLooper(val+1, 2*val, file, Keys_List);
