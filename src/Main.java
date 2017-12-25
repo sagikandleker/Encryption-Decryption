@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Main {
 
 	//Insert the PATH String to your work-space folder.
-	public static final String PATH = "C:\\Users\\sagik\\git\\Encryption_and_decryption\\";
+	public static final String PATH = "";
 	public static final String IN_PATH = PATH+"Read From files\\";
 	public static final String ENC_PATH = PATH+"Encryption files\\";
 	public static final String DEC_PATH = PATH+"Decryption files\\";
